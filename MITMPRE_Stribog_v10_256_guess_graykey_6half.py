@@ -434,8 +434,8 @@ class Constraints_generator():
         constr = constr + ['GDeg1' + ' >= 1']
         constr = constr + ['GDeg2' + ' >= 1']
         
-        constr = constr + [BasicTools.plusTerm(d1) + ' <= 26']
-        constr = constr + [BasicTools.plusTerm(d2) + ' <= 26']
+        #constr = constr + [BasicTools.plusTerm(d1) + ' <= 26']
+        #constr = constr + [BasicTools.plusTerm(d2) + ' <= 26']
        
         input1_mat = Vars_generator.genVars_input1_of_L(self.mat_r)
         input2_mat = Vars_generator.genVars_input2_of_L(self.mat_r)
@@ -558,7 +558,8 @@ class Constraints_generator():
         constr = constr + ['GObj - GDeg1 <= 0']
         constr = constr + ['GObj - GDeg2 <= 0']
         constr = constr + ['GObj - GMat <= 0']
-        constr = constr + ['GObj >= 4']
+        #constr = constr + ['GObj >= 4']
+        #constr = constr + ['GObj <= 6']
         V = BasicTools.getVariables_From_Constraints(constr)
         #fid = open('./Model/v2.lp', 'w')
         fid = open('./Model/TR' + str(self.TR) + '_ini' + str(self.ini_r) + '_matr' + str(self.mat_r) + '_256.lp', 'w')
@@ -595,8 +596,10 @@ def cmd():
     rd = open('./Model/Result_6half_guess_2.txt', 'w')
     rd.write('TR, ini_r, ini_k, mat_r: d1, d2, m' + '\n' )
     for TR in range(7, 8):
-        for ini_r in range(3, 4):
-            for mat_r in range(1, 2):
+        #for ini_r in range(3, 4):
+        for ini_r in range(0, TR-1):
+            #for mat_r in range(4, 5):
+            for mat_r in range(0, TR-1):
                 if mat_r != ini_r:                        
                     #name = './Model/TR' + str(TR) + '_ini' + str(ini_r) + '_matr' + str(mat_r) + '_guess'
                     A = Constraints_generator(TR, ini_r, mat_r)
